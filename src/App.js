@@ -11,7 +11,7 @@ class App extends Component {
     fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2')
     .then(data => data.json())
     .then(data => {
-      // console.log(data, 'data')
+      console.log(data, 'data')
         fetch(`https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=2`)
         .then(data => data.json())
         .then(data => {
