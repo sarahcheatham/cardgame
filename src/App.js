@@ -3,59 +3,76 @@ import './App.css';
 
 class App extends Component {
   state = {
-    hand: [],
     deck_id: "q4bqaadgz90k",
+    computerHand: [],
+    userHand: [],
     value: []
   };
+  
   componentDidMount(){
-    fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=2')
+    fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
     .then(data => data.json())
     .then(data => {
-      console.log(data, 'data')
-        fetch(`https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=2`)
-        .then(data => data.json())
-        .then(data => {
-          // console.log(data.cards)
-          this.setState({hand: data.cards})
+      // console.log(data, 'data')
+        fetch(`https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=1`)
+          .then(data => data.json())
+          .then(data => {
+            // console.log(data.cards)
+            this.setState({computerHand: data.cards})
         })
+        fetch(`https://deckofcardsapi.com/api/deck/${data.deck_id}/draw/?count=1`)
+          .then(data => data.json())
+          .then(data => {
+            // console.log(data.cards)
+            this.setState({userHand: data.cards})
+          })
     })
   }
-  getValues(){
-    this.state.hand.map((item, index)=>{
-      const cardValues = item.value;
-      const pushValues = this.state.value.push(cardValues);
-      const newValues = this.state.value.slice();
-      return newValues
-    });
-  }
 
-  facecardValues(newValues){
+  pushValues(){
+    this.state.computerHand.map((item, index)=>{
+      const compCardValues = item.value;
+      const removeFirstValue = this.state.value.splice(0, 1);
+      const pushCompValues = this.state.value.push(item.value);
+      return compCardValues
+    });
+    this.state.userHand.map((item, index)=>{
+      const userCardValues = item.value;
+      const pushUserValues= this.state.value.push(item.value);
+      return userCardValues
+    });
+  };
+
+  cardValues(computerValues, userValues){
     const faceCards = ['JACK', 'QUEEN', 'KING', 'ACE'];
-    let cardOne = this.state.value[0];
-    let cardTwo = this.state.value[1];
-    if(cardOne === faceCards[0] || cardOne === faceCards[1]  || cardOne === faceCards[2] || cardOne === faceCards[3]){
-      cardOne = '10';
-      console.log(cardOne, cardTwo)
-    } else if(cardTwo === faceCards[0] || cardTwo === faceCards[1] || cardTwo === faceCards[2] || cardTwo === faceCards[3]){
-      cardTwo = '10';
-      console.log(cardOne, cardTwo)
-    } else {
-      console.log(cardOne, cardTwo)
+    let compCard = this.state.value[0];
+    let userCard = this.state.value[1];
+    if(compCard === faceCards[0] || compCard === faceCards[1] || compCard === faceCards[2] || compCard === faceCards[3]){
+      this.state.value.splice(0, 1, '10');
+    }
+    if(userCard === faceCards[0] || userCard === faceCards[1] || userCard === faceCards[2] || userCard === faceCards[3]){
+      this.state.value.splice(1, 1, '10');
     }
   }
   
-  rendercards(){
-    return this.state.hand.map((card, key)=>{
-      return <img src={card.image}/>
+  renderComputerCards(){
+    return this.state.computerHand.map((card, key)=>{
+      return <img src={card.image} alt="cards"/>
+    });
+  }
+  renderUserCards(){
+    return this.state.userHand.map((card, key)=>{
+      return <img src={card.image} alt="cards"/>
     });
   }
   
   render() {
     return (
       <div className="App">
-        <div className="cards">{this.rendercards()}</div>
-        <div className="cardValues">{this.getValues()}</div>
-        <div className="cardValues">{this.facecardValues()}</div>
+        <div className="computercards">{this.renderComputerCards()}</div>
+        <div className="playercards">{this.renderUserCards()}</div>
+        <div className="cardValues">{this.pushValues()}</div>
+        <div className="cardValues">{this.cardValues()}</div>
       </div>
     );
   }
