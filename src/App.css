@@ -3,27 +3,54 @@
   grid-template-columns: 1fr 75px 1fr;
   grid-template-rows: 75px 1fr 1fr;
 }
+
+/* div that holds the computer card image */
 .computercards {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
 }
 
+/* div that holds the war text */
 .war {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
   
 }
 
+/* div that holds the usercard image */
 .usercards {
   grid-column: 3 / 4;
   grid-row: 2 / 3;
 }
+
+/* card images */
 .cards {
   display: block;
   margin-left: auto;
   margin-right: auto;
   transform: rotate(90deg);
-  
 }
+
+/* div with computers score */
+.computerscore {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  text-align: center;
+}
+
+/* div with users score */
+.userscore {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  text-align: center;
+}
+
+/* button to get a new card */
+.drawButton {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  height: 50px;
+}
+
 
 
