@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Text from './text.js';
 
 
 class App extends Component {
@@ -10,7 +11,7 @@ class App extends Component {
       computerObj: [],
       userObj: [],
       userCardValue: [],
-      computerCardValue: [],
+      computerCardValue: []
     }
   };
 
@@ -105,13 +106,36 @@ renderUserScore(){
     });
   };
 
+  showOperators(){
+    const computerCardValue = this.state.computerCardValue.slice();
+    const userCardValue = this.state.userCardValue.slice(); 
+    const valueArr = computerCardValue.concat(userCardValue);
+    if(valueArr[0] === valueArr[1]){
+      return <Text text="="/>
+    } else if(valueArr[0] < valueArr[1]){
+      return <Text text="&gt;"/>
+    } else {
+      return <Text text="&lt;"/>
+    }
+  }
+  declareWar(){
+    const computerCardValue = this.state.computerCardValue.slice();
+    const userCardValue = this.state.userCardValue.slice(); 
+    const valueArr = computerCardValue.concat(userCardValue);
+    if(valueArr[0] === valueArr[1]){
+      return "WAR!"
+    }
+  }
   render() {
     return (
       <div className="App">
         <div className="computerscore">{this.renderComputerScore()}</div>
+        <div className="operator">{this.showOperators()}</div>
         <div className="userscore">{this.renderUserScore()}</div>
         <div className="computercards">{this.renderComputerCards()}</div>
-        <div className="war" text=""></div>
+        <div className="war">
+          <Text className="wartext" text={this.declareWar()}/>
+        </div>
         <div className="usercards">{this.renderUserCards()}</div>
         <button className="drawButton" onClick={() => this.reRenderCards()}>Draw</button>
       </div>
