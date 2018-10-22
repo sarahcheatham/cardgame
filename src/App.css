@@ -1,28 +1,104 @@
 .App {
+  display: grid;
+  grid-template-columns: 1fr 75px 1fr;
+  grid-template-rows: 75px 1fr 1fr;
+  /* background-color: #EAE6DA; */
+  background-color: #DC443A;
+}
+
+/* div that holds the computer card image */
+.computercards {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+/* div that holds the war text */
+.war {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  font-family: ltc-globe-gothic, sans-serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 36px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.wartext {
+  transform: rotate(-90deg);
+  transform-origin: left top 20;
+  position: relative;
   text-align: center;
+  color: #FCF6F5;
+  
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+/* div that holds the usercard image */
+.usercards {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+/* card images */
+.cards {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(90deg);
 }
 
-.App-title {
-  font-size: 1.5em;
+/* div with computers score */
+.computerscore {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  text-align: center;
+  font-family: prohibition, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: #FCF6F5;
 }
 
-.App-intro {
-  font-size: large;
+/* div with users score */
+.userscore {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  text-align: center;
+  font-family: prohibition, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  color: #FCF6F5;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* button to get a new card */
+.drawButton {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  height: 50px;
+  font-family: prohibition, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px; 
+  color: #2D62A3;
+  background-color: #FCF6F5;
+
 }
+
+/* shows the operator for comparing the cards */
+.operator {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  text-align: center;
+  font-family: ltc-globe-gothic, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.operator p {
+  margin-top: 10px;
+  color: #FCF6F5;
+}
+
